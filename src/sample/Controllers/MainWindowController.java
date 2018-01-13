@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class SampleController {
+public class MainWindowController {
 
     private CardPack cardPack = new CardPack();
     List<Card> playerCards = new ArrayList<Card>();
