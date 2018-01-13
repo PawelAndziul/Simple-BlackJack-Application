@@ -1,0 +1,17 @@
+.card {
+    -fx-border-color: white;
+    -fx-border-radius: 10px;
+    -fx-text-fill: white;
+    -fx-alignment: center;
+    -fx-pref-width: 70;
+    -fx-pref-height: 80;
+    -fx-text-alignment: center;
+}
+
+.card-player {
+    -fx-background-color: darkgreen;
+}
+
+.card-dealer {
+    -fx-background-color: green;
+}
