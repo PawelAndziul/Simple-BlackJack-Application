@@ -27,8 +27,8 @@
     <bottom>
         <HBox alignment="CENTER" spacing="10.0" BorderPane.alignment="CENTER">
             <children>
-                <Button mnemonicParsing="false" onAction="#pickCardButtonClicked" prefWidth="100.0" text="Pick card" />
-                <Button mnemonicParsing="false" prefWidth="100.0" text="Pass" />
+                <Button mnemonicParsing="false" onAction="#pickCardButtonClicked" prefWidth="100.0" text="Hit" />
+                <Button mnemonicParsing="false" prefWidth="100.0" text="Stand" />
             </children>
             <BorderPane.margin>
                 <Insets bottom="15.0" top="15.0" />
