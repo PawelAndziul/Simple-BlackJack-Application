@@ -39,9 +39,6 @@ public class MainWindowController {
         }
         dealerCards.add(newCard);
         addCardToScene(newCard.getValue() + "\nof\n" + newCard.getType() + "s", dealerCardContainer);
-
-        int currentPoints = countPoints(dealerCards);
-        System.out.println("Dealer picked a" + " " + newCard.getValue() + " of " + newCard.getType() + "s worth " + newCard.getNumericalValue() + ", with total of " + currentPoints);
     }
 
     private void addCardToScene(String text, HBox container) {
@@ -50,24 +47,36 @@ public class MainWindowController {
         container.getChildren().add(newLabel);
     }
 
-    private int countPoints(List<Card> cardList) {
+    private List<Integer> countPoints(List<Card> cardList) {
+
         int value = 0;
+        int aces = 0;
         for (Card card : cardList) {
             value += card.getNumericalValue();
+            if (card.getValue() == "Ace") {
+                aces++;
+            }
         }
 
-        return value;
+        List<Integer> possiblePoints = new ArrayList<>();
+        possiblePoints.add(value);
+
+        for (int i = 1; i <= aces; i++) {
+            possiblePoints.add(value - i + i * 11);
+        }
+
+        return possiblePoints;
     }
 
     @FXML
     private void pickCardButtonClicked() {
 
-        int currentPoints = countPoints(playerCards);
-        if (currentPoints > 21) {
+        List<Integer> playerPoints = countPoints(playerCards);
+        int lowestPlayerPoints = playerPoints.get(0);
+        if (lowestPlayerPoints > 19) {
             System.out.println("Player lost!");
             return;
         }
-        System.out.println("Current value:" + " " + currentPoints);
 
         Card newCard = cardPack.pickCard();
         if (newCard == null) {
@@ -76,10 +85,9 @@ public class MainWindowController {
         }
         playerCards.add(newCard);
         addCardToScene(newCard.getValue() + "\nof\n" + newCard.getType() + "s", playerCardContainer);
-        currentPoints = countPoints(playerCards);
-        System.out.println("Player picked a" + " " + newCard.getValue() + " of " + newCard.getType() + "s worth " + newCard.getNumericalValue() + ", with total of " + currentPoints);
 
-        if (currentPoints > 21) {
+        lowestPlayerPoints = countPoints(playerCards).get(0);
+        if (lowestPlayerPoints > 21) {
             System.out.println("BUSTED!");
         }
     }
@@ -105,21 +113,36 @@ public class MainWindowController {
     }
 
     private void dealerDrawCards() {
-        int dealerPoints;
-        while ((dealerPoints = countPoints(dealerCards)) < 17) {
+        List<Integer> dealerPoints = countPoints(dealerCards);
+        int maxDealerPoints = dealerPoints.get(dealerPoints.size() - 1);
+
+        while (maxDealerPoints < 17) {
             Card newCard = cardPack.pickCard();
             dealerCards.add(newCard);
             addCardToScene(newCard.getValue() + "\nof\n" + newCard.getType(), dealerCardContainer);
+
+            maxDealerPoints = countPoints(dealerCards).get(dealerPoints.size() - 1);
         }
 
-        int playerPoints = countPoints(playerCards);
+        List<Integer> playerPointsList = countPoints(playerCards);
+        int playerPoints = 0;
+        for (int i = playerPointsList.size() - 1; i >= 0; i--) {
+            playerPoints = playerPointsList.get(i);
 
-        if (dealerPoints > playerPoints)
-            System.out.println("Dealer won! " + dealerPoints + " > " + playerPoints);
-        else if (dealerPoints == playerPoints)
-            System.out.println("DRAW!");
+            if (playerPoints <= 21)
+                break;
+        }
+
+        System.out.println("Dealer points: " + dealerPoints);
+        System.out.println("Player points: " + playerPointsList);
+
+        if (maxDealerPoints == playerPoints)
+            System.out.println("DRAW! " + maxDealerPoints + " = " + playerPoints);
+        else if (21 - maxDealerPoints < 21 - playerPoints && maxDealerPoints <= 21)
+            System.out.println("Dealer won! " + maxDealerPoints + " > " + playerPoints);
         else
-            System.out.println("Player won! "  + playerPoints + " > " + dealerPoints);
+            System.out.println("Player won! " + maxDealerPoints + " < " + playerPoints);
+
 
     }
 
