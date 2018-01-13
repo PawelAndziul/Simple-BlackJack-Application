@@ -32,26 +32,37 @@ public class MainWindowController {
         playerCardContainer.getChildren().add(newLabel);
     }
 
-    public void pickCardButtonClicked() {
-
-        Card newCard = cardPack.pickCard();
-
-        if (newCard == null) {
-            System.out.println("Pack is out of cards!");
-            return;
-        }
-
-        playerCards.add(newCard);
-
-        System.out.println("Player picked a" + " " + newCard.getValue() + " of " + newCard.getType() + "s" + "!");
+    private int countPlayerPoints() {
         int value = 0;
         for (Card card : playerCards) {
             value += card.getNumericalValue();
         }
 
-        System.out.println("Current value:" + " " + value);
+        return value;
+    }
 
+    public void pickCardButtonClicked() {
+
+        int currentPoints = countPlayerPoints();
+        if (currentPoints > 21) {
+            System.out.println("Player lost!");
+            return;
+        }
+        System.out.println("Current value:" + " " + currentPoints);
+
+        Card newCard = cardPack.pickCard();
+        if (newCard == null) {
+            System.out.println("Pack is out of cards!");
+            return;
+        }
+        playerCards.add(newCard);
         addCardToScene(newCard.getValue() + "\nof\n" + newCard.getType() + "s");
-        System.out.println(playerCards.size() + "/" + cardPack.getNumberOfCards());
+        currentPoints = countPlayerPoints();
+        System.out.println("Player picked a" + " " + newCard.getValue() + " of " + newCard.getType() + "s worth " + newCard.getNumericalValue() + ", with total of " + currentPoints);
+
+        if (currentPoints > 21)
+        {
+            System.out.println("BUSTED!");
+        }
     }
 }

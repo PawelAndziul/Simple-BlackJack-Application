@@ -4,6 +4,7 @@ public class Card {
     private String type;
     private String value;
     private int numericalValue;
+    private int additionalNumericalValue;
 
     public Card(String type, String value)
     {
@@ -17,6 +18,14 @@ public class Card {
         this.type = type;
         this.value = value;
         this.numericalValue = numericalValue;
+    }
+
+    public Card(String type, String value, int numericalValue, int additionalNumericalValue)
+    {
+        this.type = type;
+        this.value = value;
+        this.numericalValue = numericalValue;
+        this.additionalNumericalValue = additionalNumericalValue;
     }
 
     public String getType() {
@@ -41,5 +50,13 @@ public class Card {
 
     public void setNumericalValue(int numericalValue) {
         this.numericalValue = numericalValue;
+    }
+
+    public int getAdditionalNumericalValue() {
+        return additionalNumericalValue;
+    }
+
+    public void setAdditionalNumericalValue(int additionalNumericalValue) {
+        this.additionalNumericalValue = numericalValue;
     }
 }

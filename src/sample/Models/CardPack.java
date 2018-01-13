@@ -19,12 +19,21 @@ public class CardPack {
 
         for (String symbol : symbolArray)
         {
-            for (int i=2; i<=14; i++)
+            // 2-10
+            for (int i=2; i<=10; i++)
             {
                 cardList.add(new Card(symbol, cardValues[i-2], i));
             }
+
+            // Jack-King
+            for (int i=11; i<=13; i++)
+            {
+                cardList.add(new Card(symbol, cardValues[i-2], 10));
+            }
+
+            // Ace
+            cardList.add(new Card(symbol, "Ace", 1, 11));
         }
-        System.out.println(cardList.size());
     }
 
     public Card pickCard()
