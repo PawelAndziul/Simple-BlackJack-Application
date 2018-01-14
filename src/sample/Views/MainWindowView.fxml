@@ -24,8 +24,8 @@
         <HBox alignment="CENTER" spacing="10.0" BorderPane.alignment="CENTER">
             <children>
             <Button mnemonicParsing="false" onAction="#startNewGameButtonClicked" text="Start New Game" />
-                <Button mnemonicParsing="false" onAction="#pickCardButtonClicked" prefWidth="100.0" text="Hit" />
-                <Button mnemonicParsing="false" onAction="#standButtonClicked" prefWidth="100.0" text="Stand" />
+                <Button fx:id="buttonHit" mnemonicParsing="false" onAction="#pickCardButtonClicked" prefWidth="100.0" text="Hit" />
+                <Button fx:id="buttonStand" mnemonicParsing="false" onAction="#standButtonClicked" prefWidth="100.0" text="Stand" />
             </children>
             <BorderPane.margin>
                 <Insets bottom="15.0" top="15.0" />

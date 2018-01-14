@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change beforePath="$PROJECT_DIR$/src/sample/Controllers/MainWindowController.java" afterPath="$PROJECT_DIR$/src/sample/Controllers/MainWindowController.java" />
-      <change beforePath="$PROJECT_DIR$/src/sample/Models/PointValues.java" afterPath="" />
+      <change beforePath="$PROJECT_DIR$/src/sample/Views/MainWindowView.fxml" afterPath="$PROJECT_DIR$/src/sample/Views/MainWindowView.fxml" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -65,17 +64,19 @@
       <file leaf-file-name="MainWindowController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/sample/Controllers/MainWindowController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="359">
-              <caret line="49" column="59" lean-forward="false" selection-start-line="49" selection-start-column="59" selection-end-line="49" selection-end-column="59" />
+            <state relative-caret-position="373">
+              <caret line="77" column="0" lean-forward="true" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="method#pickCardButtonClicked#0;class#MainWindowController#0" expanded="false" />
+                <element signature="method#standButtonClicked#0;class#MainWindowController#0" expanded="false" />
+                <element signature="method#startNewGameButtonClicked#0;class#MainWindowController#0" expanded="false" />
+                <element signature="method#dealerDrawCards#0;class#MainWindowController#0" expanded="false" />
                 <element signature="method#createNewCard#0;class#MainWindowController#0" expanded="false" />
                 <element signature="method#dealerDrawCard#0;class#MainWindowController#0" expanded="false" />
                 <element signature="method#addCardToScene#0;class#MainWindowController#0" expanded="false" />
                 <element signature="method#countPoints#0;class#MainWindowController#0" expanded="false" />
-                <element signature="method#pickCardButtonClicked#0;class#MainWindowController#0" expanded="false" />
-                <element signature="method#startNewGameButtonClicked#0;class#MainWindowController#0" expanded="false" />
-                <element signature="method#dealerDrawCards#0;class#MainWindowController#0" expanded="false" />
+                <element signature="method#enableHitStandButtons#0;class#MainWindowController#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -377,12 +378,12 @@
       <option name="presentableId" value="Default" />
       <updated>1359379246138</updated>
       <workItem from="1359379250712" duration="1302000" />
-      <workItem from="1515860775541" duration="13150000" />
+      <workItem from="1515860775541" duration="13656000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14452000" />
+    <option name="totallyTimeSpent" value="14958000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -491,17 +492,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/sample/Views/MainWindowView.fxml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="40" lean-forward="false" selection-start-line="9" selection-start-column="40" selection-end-line="9" selection-end-column="40" />
-          <folding />
-        </state>
-      </provider>
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/Models/PointValues.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="221">
@@ -548,19 +538,32 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/sample/Views/MainWindowView.fxml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="10" lean-forward="false" selection-start-line="16" selection-start-column="10" selection-end-line="16" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/sample/Controllers/MainWindowController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="359">
-          <caret line="49" column="59" lean-forward="false" selection-start-line="49" selection-start-column="59" selection-end-line="49" selection-end-column="59" />
+        <state relative-caret-position="373">
+          <caret line="77" column="0" lean-forward="true" selection-start-line="77" selection-start-column="0" selection-end-line="77" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="method#pickCardButtonClicked#0;class#MainWindowController#0" expanded="false" />
+            <element signature="method#standButtonClicked#0;class#MainWindowController#0" expanded="false" />
+            <element signature="method#startNewGameButtonClicked#0;class#MainWindowController#0" expanded="false" />
+            <element signature="method#dealerDrawCards#0;class#MainWindowController#0" expanded="false" />
             <element signature="method#createNewCard#0;class#MainWindowController#0" expanded="false" />
             <element signature="method#dealerDrawCard#0;class#MainWindowController#0" expanded="false" />
             <element signature="method#addCardToScene#0;class#MainWindowController#0" expanded="false" />
             <element signature="method#countPoints#0;class#MainWindowController#0" expanded="false" />
-            <element signature="method#pickCardButtonClicked#0;class#MainWindowController#0" expanded="false" />
-            <element signature="method#startNewGameButtonClicked#0;class#MainWindowController#0" expanded="false" />
-            <element signature="method#dealerDrawCards#0;class#MainWindowController#0" expanded="false" />
+            <element signature="method#enableHitStandButtons#0;class#MainWindowController#0" expanded="false" />
           </folding>
         </state>
       </provider>

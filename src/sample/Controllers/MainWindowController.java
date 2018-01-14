@@ -1,6 +1,7 @@
 package sample.Controllers;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import sample.Models.Card;
@@ -8,7 +9,6 @@ import sample.Models.CardPack;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 
 public class MainWindowController {
@@ -23,50 +23,11 @@ public class MainWindowController {
     @FXML
     private HBox dealerCardContainer;
 
-    private Label createNewCard() {
-        Label newLabel = new Label();
-        newLabel.getStyleClass().add("card");
-        newLabel.getStyleClass().add("card-player");
+    @FXML
+    private Button buttonHit;
 
-        return newLabel;
-    }
-
-    private void dealerDrawCard() {
-        Card newCard = cardPack.pickCard();
-        if (newCard == null) {
-            System.out.println("Pack is out of cards!");
-            return;
-        }
-        dealerCards.add(newCard);
-        addCardToScene(newCard.getValue() + "\nof\n" + newCard.getType() + "s", dealerCardContainer);
-    }
-
-    private void addCardToScene(String text, HBox container) {
-        Label newLabel = createNewCard();
-        newLabel.setText(text);
-        container.getChildren().add(newLabel);
-    }
-
-    private List<Integer> countPoints(List<Card> cardList) {
-
-        int value = 0;
-        int aces = 0;
-        for (Card card : cardList) {
-            value += card.getNumericalValue();
-            if (card.getValue() == "Ace") {
-                aces++;
-            }
-        }
-
-        List<Integer> possiblePoints = new ArrayList<>();
-        possiblePoints.add(value);
-
-        for (int i = 1; i <= aces; i++) {
-            possiblePoints.add(value - i + i * 11);
-        }
-
-        return possiblePoints;
-    }
+    @FXML
+    private Button buttonStand;
 
     @FXML
     private void pickCardButtonClicked() {
@@ -94,11 +55,14 @@ public class MainWindowController {
 
     @FXML
     private void standButtonClicked() {
+        enableHitStandButtons(true);
         dealerDrawCards();
     }
 
     @FXML
     private void startNewGameButtonClicked() {
+        enableHitStandButtons(false);
+
         cardPack = new CardPack();
 
         dealerCardContainer.getChildren().removeAll();
@@ -145,5 +109,56 @@ public class MainWindowController {
 
 
     }
+
+    private Label createNewCard() {
+        Label newLabel = new Label();
+        newLabel.getStyleClass().add("card");
+        newLabel.getStyleClass().add("card-player");
+
+        return newLabel;
+    }
+
+    private void dealerDrawCard() {
+        Card newCard = cardPack.pickCard();
+        if (newCard == null) {
+            System.out.println("Pack is out of cards!");
+            return;
+        }
+        dealerCards.add(newCard);
+        addCardToScene(newCard.getValue() + "\nof\n" + newCard.getType() + "s", dealerCardContainer);
+    }
+
+    private void addCardToScene(String text, HBox container) {
+        Label newLabel = createNewCard();
+        newLabel.setText(text);
+        container.getChildren().add(newLabel);
+    }
+
+    private List<Integer> countPoints(List<Card> cardList) {
+
+        int value = 0;
+        int aces = 0;
+        for (Card card : cardList) {
+            value += card.getNumericalValue();
+            if (card.getValue() == "Ace") {
+                aces++;
+            }
+        }
+
+        List<Integer> possiblePoints = new ArrayList<>();
+        possiblePoints.add(value);
+
+        for (int i = 1; i <= aces; i++) {
+            possiblePoints.add(value - i + i * 11);
+        }
+
+        return possiblePoints;
+    }
+
+    private void enableHitStandButtons(Boolean lock) {
+        buttonHit.setDisable(lock);
+        buttonStand.setDisable(lock);
+    }
+
 
 }
