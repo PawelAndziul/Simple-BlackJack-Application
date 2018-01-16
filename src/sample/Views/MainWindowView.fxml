@@ -10,9 +10,9 @@
 
 <Pane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controllers.MainWindowController">
    <children>
-      <BorderPane maxHeight="400.0" maxWidth="600.0" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: green;" stylesheets="@../Resources/mainCSS.css">
+      <BorderPane maxHeight="400.0" maxWidth="600.0" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: darkgreen;" stylesheets="@../Resources/mainCSS.css">
           <top>
-              <HBox fx:id="dealerCardContainer" alignment="CENTER" spacing="10.0" style="-fx-background-color: darkgreen;" BorderPane.alignment="CENTER">
+              <HBox fx:id="dealerCardContainer" alignment="CENTER" prefHeight="80.0" prefWidth="600.0" spacing="10.0" style="-fx-background-color: darkgreen;" BorderPane.alignment="CENTER">
                   <BorderPane.margin>
                       <Insets bottom="5.0" top="5.0" />
                   </BorderPane.margin>
