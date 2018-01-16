@@ -15,3 +15,23 @@
 .card-dealer {
     -fx-background-color: green;
 }
+
+.pane-result {
+    visibility: false;
+}
+
+.pane-result-cover {
+    -fx-opacity: 25%;
+    -fx-background-color: black;
+    
+}
+
+.message-game-result {
+    -fx-background-color: #6b3df5;
+    -fx-background-radius: 20px;
+    -fx-opacity: 100%;
+    -fx-border-style: hidden;
+
+    -fx-font-size: 40px;
+    -fx-font-family: "Lucida Console";
+}

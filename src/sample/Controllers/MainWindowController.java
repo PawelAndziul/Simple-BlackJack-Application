@@ -3,6 +3,7 @@ package sample.Controllers;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import sample.Models.Card;
 import sample.Models.CardPack;
@@ -16,6 +17,12 @@ public class MainWindowController {
     private CardPack cardPack = new CardPack();
     List<Card> playerCards = new ArrayList<>();
     List<Card> dealerCards = new ArrayList<>();
+
+    @FXML
+    private BorderPane resultMessagePane;
+
+    @FXML
+    private Label resultLabel;
 
     @FXML
     private HBox playerCardContainer;
@@ -35,7 +42,7 @@ public class MainWindowController {
         List<Integer> playerPoints = countPoints(playerCards);
         int lowestPlayerPoints = playerPoints.get(0);
         if (lowestPlayerPoints > 19) {
-            System.out.println("Player lost!");
+            gameEnd("Dealer");
             return;
         }
 
@@ -49,7 +56,7 @@ public class MainWindowController {
 
         lowestPlayerPoints = countPoints(playerCards).get(0);
         if (lowestPlayerPoints > 21) {
-            System.out.println("BUSTED!");
+            gameEnd("Dealer");
         }
     }
 
@@ -76,6 +83,44 @@ public class MainWindowController {
         dealerDrawCard();
     }
 
+    @FXML
+    private void resultMessagePaneClicked() {
+        resultMessagePane.setVisible(false);
+        resultMessagePane.setDisable(true);
+    }
+
+    private void checkWinner(int maxDealerPoints) {
+        List<Integer> playerPointsList = countPoints(playerCards);
+        int playerPoints = 0;
+        for (int i = playerPointsList.size() - 1; i >= 0; i--) {
+            playerPoints = playerPointsList.get(i);
+
+            if (playerPoints <= 21)
+                break;
+        }
+
+        if (maxDealerPoints == playerPoints) {
+            System.out.println("DRAW! " + maxDealerPoints + " = " + playerPoints);
+            gameEnd("DRAW");
+        } else if (21 - maxDealerPoints < 21 - playerPoints && maxDealerPoints <= 21) {
+            System.out.println("Dealer won! " + maxDealerPoints + " > " + playerPoints);
+            gameEnd("Dealer");
+        } else {
+            System.out.println("Player won! " + maxDealerPoints + " < " + playerPoints);
+            gameEnd("Player");
+        }
+    }
+
+    private void gameEnd(String winner) {
+        resultMessagePane.setVisible(true);
+        resultMessagePane.setDisable(false);
+
+        if (winner == "DRAW")
+            resultLabel.setText("DRAW!");
+        else
+            resultLabel.setText(winner + " won!");
+    }
+    
     private void dealerDrawCards() {
         List<Integer> dealerPoints = countPoints(dealerCards);
         int maxDealerPoints = dealerPoints.get(dealerPoints.size() - 1);
@@ -88,26 +133,7 @@ public class MainWindowController {
             maxDealerPoints = countPoints(dealerCards).get(dealerPoints.size() - 1);
         }
 
-        List<Integer> playerPointsList = countPoints(playerCards);
-        int playerPoints = 0;
-        for (int i = playerPointsList.size() - 1; i >= 0; i--) {
-            playerPoints = playerPointsList.get(i);
-
-            if (playerPoints <= 21)
-                break;
-        }
-
-        System.out.println("Dealer points: " + dealerPoints);
-        System.out.println("Player points: " + playerPointsList);
-
-        if (maxDealerPoints == playerPoints)
-            System.out.println("DRAW! " + maxDealerPoints + " = " + playerPoints);
-        else if (21 - maxDealerPoints < 21 - playerPoints && maxDealerPoints <= 21)
-            System.out.println("Dealer won! " + maxDealerPoints + " > " + playerPoints);
-        else
-            System.out.println("Player won! " + maxDealerPoints + " < " + playerPoints);
-
-
+        checkWinner(maxDealerPoints);
     }
 
     private Label createNewCard() {
