@@ -1,16 +1,16 @@
-package sample.Controllers;
+package main.java.sample.Controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import sample.Models.Card;
-import sample.Models.CardPack;
+import main.java.sample.Dao.DBStatsInserter;
+import main.java.sample.Models.Card;
+import main.java.sample.Models.CardPack;
 
 import java.util.ArrayList;
 import java.util.List;
-
 
 public class MainWindowController {
 
@@ -99,16 +99,20 @@ public class MainWindowController {
                 break;
         }
 
+        String winner = "";
         if (maxDealerPoints == playerPoints) {
             System.out.println("DRAW! " + maxDealerPoints + " = " + playerPoints);
-            gameEnd("DRAW");
+            winner = "draw";
         } else if (21 - maxDealerPoints < 21 - playerPoints && maxDealerPoints <= 21) {
             System.out.println("Dealer won! " + maxDealerPoints + " > " + playerPoints);
-            gameEnd("Dealer");
+            winner = "dealer";
         } else {
             System.out.println("Player won! " + maxDealerPoints + " < " + playerPoints);
-            gameEnd("Player");
+            winner = "player";
         }
+
+        saveResultsIntoDatabase(playerPoints, maxDealerPoints , winner);
+        gameEnd(winner);
     }
 
     private void gameEnd(String winner) {
@@ -186,5 +190,9 @@ public class MainWindowController {
         buttonStand.setDisable(lock);
     }
 
-
+    private void saveResultsIntoDatabase(int playerPoints, int dealerPoints, String winner)
+    {
+        DBStatsInserter dbStatsInserter = new DBStatsInserter(0, playerPoints, dealerPoints, winner);
+        dbStatsInserter.addToDatabase();
+    }
 }

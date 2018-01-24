@@ -1,4 +1,4 @@
-package sample.Models;
+package main.java.sample.Models;
 
 public class Card {
     private String type;

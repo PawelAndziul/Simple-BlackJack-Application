@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.Pane?>
 
 
-<AnchorPane minHeight="400.0" minWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controllers.MainWindowController">
+<AnchorPane minHeight="400.0" minWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.sample.Controllers.MainWindowController">
    <children>
       <BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="400.0" minWidth="600.0" style="-fx-background-color: darkgreen;" stylesheets="@../Resources/mainCSS.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
           <top>
