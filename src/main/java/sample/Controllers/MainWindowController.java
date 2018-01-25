@@ -18,12 +18,14 @@ public class MainWindowController {
     List<Card> playerCards = new ArrayList<>();
     List<Card> dealerCards = new ArrayList<>();
 
+    // result overlay
     @FXML
     private BorderPane resultMessagePane;
 
     @FXML
     private Label resultLabel;
 
+    // main window
     @FXML
     private HBox playerCardContainer;
 
@@ -37,10 +39,11 @@ public class MainWindowController {
     private Button buttonStand;
 
     @FXML
-    private void pickCardButtonClicked() {
-
+    private void hitButtonClicked() {
         List<Integer> playerPoints = countPoints(playerCards);
         int lowestPlayerPoints = playerPoints.get(0);
+
+        // if player has more than 19 points and draws new card
         if (lowestPlayerPoints > 19) {
             gameEnd("Dealer");
             return;
@@ -80,7 +83,7 @@ public class MainWindowController {
         dealerCards = new ArrayList<>();
         playerCards = new ArrayList<>();
 
-        dealerDrawCard();
+        dealerPickCardFromDeck();
     }
 
     @FXML
@@ -92,6 +95,8 @@ public class MainWindowController {
     private void checkWinner(int maxDealerPoints) {
         List<Integer> playerPointsList = countPoints(playerCards);
         int playerPoints = 0;
+
+        // playerPoints is sorted list with highest value at the end
         for (int i = playerPointsList.size() - 1; i >= 0; i--) {
             playerPoints = playerPointsList.get(i);
 
@@ -111,7 +116,7 @@ public class MainWindowController {
             winner = "player";
         }
 
-        saveResultsIntoDatabase(playerPoints, maxDealerPoints , winner);
+        saveResultsIntoDatabase(playerPoints, maxDealerPoints, winner);
         gameEnd(winner);
     }
 
@@ -119,12 +124,12 @@ public class MainWindowController {
         resultMessagePane.setVisible(true);
         resultMessagePane.setDisable(false);
 
-        if (winner == "DRAW")
+        if (winner == "draw")
             resultLabel.setText("DRAW!");
         else
             resultLabel.setText(winner + " won!");
     }
-    
+
     private void dealerDrawCards() {
         List<Integer> dealerPoints = countPoints(dealerCards);
         int maxDealerPoints = dealerPoints.get(dealerPoints.size() - 1);
@@ -140,7 +145,7 @@ public class MainWindowController {
         checkWinner(maxDealerPoints);
     }
 
-    private Label createNewCard() {
+    private Label createCardLabel() {
         Label newLabel = new Label();
         newLabel.getStyleClass().add("card");
         newLabel.getStyleClass().add("card-player");
@@ -148,7 +153,7 @@ public class MainWindowController {
         return newLabel;
     }
 
-    private void dealerDrawCard() {
+    private void dealerPickCardFromDeck() {
         Card newCard = cardPack.pickCard();
         if (newCard == null) {
             System.out.println("Pack is out of cards!");
@@ -159,7 +164,7 @@ public class MainWindowController {
     }
 
     private void addCardToScene(String text, HBox container) {
-        Label newLabel = createNewCard();
+        Label newLabel = createCardLabel();
         newLabel.setText(text);
         container.getChildren().add(newLabel);
     }
@@ -178,6 +183,7 @@ public class MainWindowController {
         List<Integer> possiblePoints = new ArrayList<>();
         possiblePoints.add(value);
 
+        // count points for each ace combination
         for (int i = 1; i <= aces; i++) {
             possiblePoints.add(value - i + i * 11);
         }
@@ -190,8 +196,7 @@ public class MainWindowController {
         buttonStand.setDisable(lock);
     }
 
-    private void saveResultsIntoDatabase(int playerPoints, int dealerPoints, String winner)
-    {
+    private void saveResultsIntoDatabase(int playerPoints, int dealerPoints, String winner) {
         DBStatsInserter dbStatsInserter = new DBStatsInserter(0, playerPoints, dealerPoints, winner);
         dbStatsInserter.addToDatabase();
     }

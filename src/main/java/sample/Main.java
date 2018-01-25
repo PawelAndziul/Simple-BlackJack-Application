@@ -6,9 +6,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-
 public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{

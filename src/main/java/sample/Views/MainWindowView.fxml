@@ -30,7 +30,7 @@
               <HBox alignment="CENTER" spacing="10.0" BorderPane.alignment="BOTTOM_CENTER">
                   <children>
                   <Button minHeight="25.0" minWidth="105.0" mnemonicParsing="false" onAction="#startNewGameButtonClicked" text="Start New Game" />
-                      <Button fx:id="buttonHit" minHeight="25.0" minWidth="105.0" mnemonicParsing="false" onAction="#pickCardButtonClicked" text="Hit" />
+                      <Button fx:id="buttonHit" minHeight="25.0" minWidth="105.0" mnemonicParsing="false" onAction="#hitButtonClicked" text="Hit" />
                       <Button fx:id="buttonStand" minHeight="25.0" minWidth="105.0" mnemonicParsing="false" onAction="#standButtonClicked" text="Stand" />
                   </children>
                   <BorderPane.margin>
