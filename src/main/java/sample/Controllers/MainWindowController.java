@@ -105,6 +105,9 @@ public class MainWindowController {
             resultLabel.setText(winner + "!");
 
         showResultMessage();
+        saveResultsIntoDatabase(game.getPlayerPoints(),
+                game.getDealerPoints(),
+                winner);
     }
 
     private Label createCardLabel() {

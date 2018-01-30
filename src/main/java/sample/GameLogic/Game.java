@@ -11,11 +11,21 @@ public class Game {
     List<Card> playerCards = new ArrayList<>();
     List<Card> dealerCards = new ArrayList<>();
 
+    private String gameResult = "";
+    private int playerPoints = -1;
+    private int dealerPoints = -1;
+
     public String getGameResult() {
         return gameResult;
     }
 
-    private String gameResult = "";
+    public int getPlayerPoints() {
+        return playerPoints;
+    }
+
+    public int getDealerPoints() {
+        return dealerPoints;
+    }
 
     public String hit() {
         Card newCard = cardPack.pickCard();
@@ -69,6 +79,8 @@ public class Game {
 
     public void startNewGame() {
         gameResult = "";
+        playerPoints = -1;
+        dealerPoints = -1;
         playerCards = new ArrayList<>();
         dealerCards = new ArrayList<>();
     }
@@ -107,13 +119,14 @@ public class Game {
             if (pointValue > maxDealerPoints && pointValue <= 21 || maxDealerPoints == -1)
                 maxDealerPoints = pointValue;
         }
+        dealerPoints = maxDealerPoints;
 
         int maxPlayerPoints = -1;
         for (int pointValue : countPoints(playerCards)) {
             if (pointValue > maxPlayerPoints && pointValue <= 21  || maxPlayerPoints == -1)
                 maxPlayerPoints = pointValue;
         }
-
+        playerPoints = maxPlayerPoints;
 
         if (maxDealerPoints == maxPlayerPoints) {
             System.out.println("DRAW! " + maxDealerPoints + " = " + maxPlayerPoints);
